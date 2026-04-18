@@ -6,14 +6,16 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 14:07:39 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/17 16:30:12 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/18 16:45:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <cmath>
 
-Fixed::Fixed(): nbr(0){
+const int Fixed::fract = 8;
+
+Fixed::Fixed(){
 	std::cout << "default constructor called\n" << std::flush;
 	this->nbr = 0;	
 }
@@ -26,14 +28,12 @@ Fixed::Fixed(const Fixed &fix){
 
 Fixed::Fixed(const int nbr){
 	std::cout << "Int constructor called\n" << std::flush;
-	int tmp = nbr;
-	this->nbr = roundf(static_cast<int>(nbr << this->fract));
+	this->nbr = nbr << this->fract;
 }
 
 Fixed::Fixed(const float nbr){
 	std::cout << "Float constructor called\n" << std::flush;
-	float tmp = nbr;
-	this->nbr = roundf(static_cast<int>(tmp * (1 << this->fract)));
+	this->nbr = roundf(nbr * (1 << this->fract));
 }
 
 Fixed &Fixed::operator=(const Fixed &fix){
@@ -53,11 +53,11 @@ Fixed::~Fixed(){
 }
 
 float Fixed::toFloat() const{
-	return (static_cast<float>(this->nbr * (1 << this->fract)));
+	return (static_cast<float>(this->nbr) / (1 << this->fract));
 }
 
 int Fixed::toInt() const{
-	return (static_cast<int>(this->nbr * (1 << this->fract)));
+	return (this->nbr >> this->fract);
 }
 
 int Fixed::getRawBits() const{
