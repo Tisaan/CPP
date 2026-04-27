@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   Brains.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/21 17:09:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/22 15:22:24 by tseche           ###   ########.fr       */
+/*   Created: 2026/04/27 16:25:03 by tseche            #+#    #+#             */
+/*   Updated: 2026/04/27 17:43:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 #include <iostream>
 
-class ClapTrap{
+class Brain{
 	private:
-		std::string name;
-		int hit;
-		int energy;
-		int attack_d;
+		std::string ideas[100];
 	public:
-		ClapTrap();
-		ClapTrap(std::string &name);
-		ClapTrap(ClapTrap &clap);
-		~ClapTrap();
+		Brain();
+		Brain(const Brain &b);
+		~Brain();
 
-		ClapTrap &operator=(ClapTrap &clap);
-
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
+		const Brain &operator=(const Brain &b);
 };
+

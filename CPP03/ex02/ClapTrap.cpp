@@ -6,15 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:09:23 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/22 16:24:32 by tseche           ###   ########.fr       */
+/*   Updated: 2026/04/22 16:45:17 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-
 ClapTrap::ClapTrap(){
-	std::cout << "|Claptrap| default constructor called\n" << std::flush;
+	std::cout << "|ClapTrap| default constructor called\n" << std::flush;
 	this->name = std::string("george");
 	this->energy = 10;
 	this->hit = 10;
@@ -22,12 +21,12 @@ ClapTrap::ClapTrap(){
 }
 
 ClapTrap::ClapTrap(ClapTrap &clap){
-	std::cout << "|Claptrap| copy constructor called\n" << std::flush;
+	std::cout << "|ClapTrap| copy constructor called\n" << std::flush;
 	*this = clap;
 }
 
 ClapTrap::ClapTrap(std::string &name){
-	std::cout << "|Claptrap| naming constructor called\n" << std::flush;
+	std::cout << "|ClapTrap| naming constructor called\n" << std::flush;
 	this->name = name;
 	this->energy = 10;
 	this->hit = 10;
@@ -41,14 +40,14 @@ ClapTrap &ClapTrap::operator=(ClapTrap &clap) {
 }
 
 ClapTrap::~ClapTrap(){
-	std::cout << "|Claptrap| destructor called\n" << std::flush;
+	std::cout << "|ClapTrap| destructor called\n" << std::flush;
 }
 
 //
 
 void ClapTrap::attack(const std::string &target){
 	if (this->energy == 0 || this->hit == 0){
-		std::cout << "|Claptrap| couldn't do anything, no energy/hit point left\n" << std::flush;
+		std::cout << "|ClapTrap| couldn't do anything, no energy/hit point left\n" << std::flush;
 		return;
 	}
 	this->energy -= 1;
@@ -58,7 +57,7 @@ void ClapTrap::attack(const std::string &target){
 
 void ClapTrap::beRepaired(unsigned int amount){
 	if (this->energy == 0){
-		std::cout << "|Claptrap| couldn't abything, no energy/hit point left\n" << std::flush;
+		std::cout << "|ClapTrap| couldn't abything, no energy/hit point left\n" << std::flush;
 		return;
 	}
 	std::cout << "|Claptrap| " << this->name << " gain " << amount << " hit point\n" << std::flush;
