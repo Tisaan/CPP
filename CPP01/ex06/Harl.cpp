@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:46:08 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/16 20:45:26 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/02 15:15:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void Harl::complain(std::string level)
 		if (!print && (level == methods[i].name))
 			print = 1;
 		//je sais que c dumb asf mais j'avais design
-		//l'ex avec les switch case en tete
+		//l'ex sans les switch case en tete
 		switch (print)
 			case 1:{
 				std::cout << "[ " << methods[i].name << " ]\n" << std::flush;
