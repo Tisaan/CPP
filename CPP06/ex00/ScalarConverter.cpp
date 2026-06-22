@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/13 17:04:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/22 14:47:06 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ struct f_table{
 
 using i_table = s_table;
 
-// --------------[LOGIC]------------------
+// --------------[LOGIC]------------------ \\
 
 data	*init_data(int point,
 	std::string::iterator repr,
