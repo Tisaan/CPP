@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/22 14:47:06 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/25 16:22:58 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,9 @@ enum state{
 	other,
 };
 
-struct data{
-	int point;
-	std::string::iterator repr;
-	i_table	table;
-	bool	f;
-	f_table	*state_table;
-	repr_table repr;
-	std::string end;
-};
+using i_table = s_table;
+
+struct data;
 
 typedef void (* func)(data *);
 
@@ -52,47 +46,104 @@ struct f_table{
 	func callback; 
 };
 
-using i_table = s_table;
+struct data{
+	int point;
+	s_table	table;
+	f_table	*state_table;
+	repr_table repr_t;
+	int *rec;
+	size_t len;
+	std::string *str;
+};
 
 // --------------[LOGIC]------------------ \\
 
 data	*init_data(int point,
-	std::string::iterator repr,
 	i_table	table,
-	bool	f,
 	f_table	*state_table,
-	std::string &s)
+	repr_table repr_t,
+	int *rec,
+	std::string &s
+)
 {
 	data	*d = new data;
-	d->f = f;
 	d->point = point;
-	d->repr = repr;
+	d->repr_t = repr_t;
 	d->state_table = state_table;
 	d->table = table;
-	d->end = s;
+	d->rec = rec;
+	d->len = s.length();
+	d->str = &s;
 	return (d);
 }
 
+void	add_char(data *d){
+	for (int i = 0; i < 5; i++){
+		switch (i){
+			case 0:{
+				if (d->table.i)
+					d->repr_t.i->insert(0, 1, d->str[d->len - *d->rec]);
+				break;
+			}
+			case 1:{
+				if (d->table.f)
+					d->repr_t.f->insert(0, 1, d->str[d->len - *d->rec]);
+				break;
+			}
+			case 2:{
+				if (d->table.f)
+					d->repr_t.f->insert(0, 1, d->str[d->len - *d->rec]);
+				break;
+			}
+			case 3:{
+				if (d->table.c)
+					d->repr_t.c->insert(0, 1, d->str[d->len - *d->rec]);
+				break;
+			}
+		}
+	}
+}
 
 void	fbpoint(data *d)
 {
-	
+	add_char(d);
 }
 
 void fapoint(data *d)
 {
-	
+	add_char(d);
 }
 
 void	fpoint(data *d)
 {
 	d->table.i = false;
 	d->table.c = false;
+	if (*d->rec > 52)
+		d->table.d = false;
+	else if (*d->rec > 23)
+		d->table.f = false;
+	add_char(d);
 }
 
 void fother(data *d)
 {
-	
+	if (d->rec == 0)
+	{
+		if (d->str[d->len - *d->rec] == "f")
+		{
+			d->table.c = false;
+			d->table.d = false;
+			d->table.i = false;
+			add_char(d);
+		}
+	}
+	else
+	{
+		d->table.c = false;
+		d->table.d = false;
+		d->table.i = false;
+		d->table.f = false;
+	}
 }
 
 
@@ -123,11 +174,12 @@ void	ass_state_table(data *d)
 
 func change_state(data *d)
 {
-	if (std::isdigit(*d->repr) && d->point)
+	std::cout << d->str->at(d->len - *d->rec) << "\n" << std::flush;
+	if (std::isdigit(d->str->at(d->len - *d->rec) && d->point))
 		return fapoint;
-	else if (std::isdigit(*d->repr))
+	else if (std::isdigit(d->str->at(d->len - *d->rec)))
 		return (fbpoint);
-	else if ((*d->repr) == '.')
+	else if (d->str->at(d->len - *d->rec) == '.')
 		return (fpoint);
 	else
 		return (fother);
@@ -141,23 +193,30 @@ void	print(data *d)
 void ScalarConverter::convert(std::string &s)
 {
 	static	int		point =  0;
-	static	auto	repr = s.end();
+	static	auto	repr = --s.end();
 	static	i_table table = {.i = true, .f = true, .d = true, .c = true};
 	static	bool	f = true;
 	static	f_table	*state_table = new f_table[4];
+	static int 		rec = 0;
 	data	*d;
 
-	if (repr == s.end())
+	if (rec == 0)
 	{
-		d = init_data(point, repr, table, f, state_table, s);
+		repr_table repr_t = {
+			.i = new std::string(""),
+			.f = new std::string(""),
+			.d = new std::string(""),
+			.c = new std::string(""),
+		};
+		d = init_data(0, table, state_table, repr_t, &rec, s);
 		ass_state_table(d);
 	}
-	else if (repr == s.begin())
+	else if (rec == d->len)
 	{
 		print(d);
 		return ;
 	}
 	(change_state(d))(d);
-	std::string nstr = std::string(d->end.begin(), d->repr);
-	convert(nstr);
+	rec++;
+	convert(s);
 }

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 12:08:27 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/25 14:58:59 by tseche           ###   ########.fr       */
+/*   Created: 2026/06/09 12:52:55 by rcompain          #+#    #+#             */
+/*   Updated: 2026/06/25 14:58:32 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "ScalarConverter.hpp"
 
-class ScalarConverter{
-	public:
-		static void convert(std::string &s);
-};
+int main (int ac, char **av){
+	if (ac != 2) return 1;
+	std::string str (av[1]);
+	ScalarConverter::convert(str);
+	return 0;
+}
