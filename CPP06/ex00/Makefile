@@ -6,14 +6,14 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/25 15:07:06 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/26 15:50:20 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = Converter
-CFLAGS = -Wall -Werror -Wextra -g -std=c++98
-CC	= c++
+CXXFLAGS = -Wall -Werror -Wextra -g -O0 -std=c++98 -fno-omit-frame-pointer
+CXX	= clang++
 SRCS =  ./main.cpp \
 		./ScalarConverter.cpp \
 
@@ -21,10 +21,10 @@ SRCS =  ./main.cpp \
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(CFLAG) $(SRCS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 	
 %.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
