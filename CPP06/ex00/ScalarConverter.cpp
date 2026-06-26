@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/26 16:55:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/26 17:51:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <cstdlib>
 
 typedef struct s_table{
 	bool	i;
@@ -79,26 +80,27 @@ data	*init_data(int point,
 }
 
 void	add_char(data *d){
+	char &c = d->str->at(d->len - *d->rec -1);
 	for (int i = 0; i < 5; i++){
 		switch (i){
 			case 0:{
 				if (d->table.i)
-					d->repr_t.i->insert(0, 1, d->str->at(d->len - *d->rec -1 ));
+					d->repr_t.i->insert(0, 1, c);
 				break;
 			}
 			case 1:{
 				if (d->table.f)
-					d->repr_t.f->insert(0, 1, d->str->at(d->len - *d->rec -1 ));
+					d->repr_t.f->insert(0, 1, c);
 				break;
 			}
 			case 2:{
-				if (d->table.d)
-					d->repr_t.d->insert(0, 1, d->str->at(d->len - *d->rec -1 ));
+				if (d->table.d && c != 'f')
+					d->repr_t.d->insert(0, 1, c);
 				break;
 			}
 			case 3:{
 				if (d->table.c)
-					d->repr_t.c->insert(0, 1, d->str->at(d->len - *d->rec -1 ));
+					d->repr_t.c->insert(0, 1, c);
 				break;
 			}
 		}
@@ -153,6 +155,11 @@ void check(data *d)
 					d->repr_t.i->assign(d->str->substr(0, f))
 				);
 			}
+			else if (d->str->at(0) == '.')
+			{
+				d->repr_t.f->insert(0, 1, '0');
+				d->repr_t.d->insert(0, 1, '0');
+			}
 		}
 	}
 }
@@ -183,9 +190,7 @@ void fother(data *d)
 {
 	if (*d->rec == 0 && d->str->at(d->len - *d->rec -1) == 'f')
 	{
-		std::cout << "enet\n" << std::flush;
 		d->table.c = false;
-		d->table.d = false;
 		d->table.i = false;
 		add_char(d);
 	}
@@ -254,6 +259,15 @@ void	print(data *d)
 				break;
 			}
 			case 3:{
+				char *endptr;
+				long l = strtol(d->repr_t.c->c_str(), &endptr, 10);
+				if (l < 0 || l > 127)
+					d->table.c = false;
+				char c = static_cast<char>(l);
+				if (isprint(c))
+					d->repr_t.c->assign(std::string("'") += c).append("'");
+				else
+					d->repr_t.c->assign("Non Displayable");
 				std::cout << "char:" << (d->table.c ? *d->repr_t.c : std::string("Impossible")) << "\n" << std::flush;
 				break;
 			}
