@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 13:22:07 by tseche            #+#    #+#             */
-/*   Updated: 2026/02/04 16:16:56 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/29 15:04:53 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	main(int ac, char **argv)
 	}
 	for (int i = 1; argv[i]; i++)
 	{
-		for (int j = 0; argv[i][j]; j++)
+		std::string s = std::string(argv[i]);
+		for (std::string::iterator j = s.begin(); j < s.end(); j++)
 		{
-			std::cout << static_cast<unsigned char>(std::toupper(argv[i][j]));
+			std::cout << static_cast<unsigned char>(std::toupper(*j));
 		}
 	}
 	std::cout << std::endl;

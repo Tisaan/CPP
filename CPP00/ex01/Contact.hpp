@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 13:41:21 by tseche            #+#    #+#             */
-/*   Updated: 2026/03/31 14:31:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/29 17:48:19 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 class Contact
 {
-private:
 public:
 	std::string name;
 	std::string surname;
@@ -25,5 +24,8 @@ public:
 	std::string phone;
 	std::string secret;
 	Contact(std::string name, std::string surname, std::string nickname, std::string phone, std::string secret);
+	Contact();
 	~Contact();
 };
+
+std::ostream &operator<<(std::ostream &o, const Contact &c);

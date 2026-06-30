@@ -6,12 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/26 17:51:28 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/29 14:58:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <cstdlib>
+#include <cstring>
 
 typedef struct s_table{
 	bool	i;
@@ -178,23 +179,42 @@ void	fpoint(data *d)
 	}
 	d->table.i = false;
 	d->table.c = false;
-	if (*d->rec > 52)
-		d->table.d = false;
-	else if (*d->rec > 23)
-		d->table.f = false;
 	d->point = true;
 	add_char(d);
 }
 
 void fother(data *d)
 {
-	if (*d->rec == 0 && d->str->at(d->len - *d->rec -1) == 'f')
+	if (d->len == 1 && std::isprint(d->str->at(d->len - *d->rec - 1)))
+	{
+		d->table.d = false;
+		d->table.i = false;
+		d->table.f = false;
+		add_char(d);
+		d->end = true;
+	} else if (*d->str == std::string("-inf") || *d->str == std::string("+inf") || *d->str == std::string("nan"))
+	{
+		d->table.c = false;
+		d->table.i = false;
+		d->repr_t.f->insert(0, *d->str);
+		d->repr_t.d->insert(0, *d->str);
+		d->end = true;
+	} else if (*d->str == std::string("-inff") || *d->str == std::string("+inff") || *d->str == std::string("nanf"))
+	{
+		d->table.c = false;
+		d->table.i = false;
+		d->repr_t.f->insert(0, *d->str);
+		d->repr_t.d->insert(0, *d->str);
+		d->end = true;
+	} else if (*d->rec == 0 && d->str->at(d->len - *d->rec -1) == 'f')
 	{
 		d->table.c = false;
 		d->table.i = false;
 		add_char(d);
-	}
-	else {
+	} else if ((d->len - *d->rec - 1) == 0 && std::strchr("-+", d->str->at(d->len - *d->rec - 1)))
+	{
+		add_char(d);
+	} else {
 		d->table.c = false;
 		d->table.d = false;
 		d->table.i = false;
@@ -228,11 +248,9 @@ void	ass_state_table(data *d)
 
 func change_state(data *d)
 {
-	std::cout << "len[" << d->len << "], rec[" << *d->rec << "]\n" << std::flush;
-	std::cout << d->str->at(d->len - *d->rec -1 ) << "\n" << std::flush;
-	if (std::isdigit(d->str->at(d->len - *d->rec -1 ) && d->point))
+	if (std::isdigit(d->str->at(d->len - *d->rec -1) && d->point))
 		return fapoint;
-	else if (std::isdigit(d->str->at(d->len - *d->rec -1 )))
+	else if (std::isdigit(d->str->at(d->len - *d->rec -1)))
 		return (fbpoint);
 	else if (d->str->at(d->len - *d->rec -1 ) == '.')
 		return (fpoint);
@@ -242,7 +260,6 @@ func change_state(data *d)
 
 void	print(data *d)
 {
-	std::cout << "end\n" << std::flush;
 	check(d);
 	for (int i = 0; i < 5; i++){
 		switch (i){
@@ -259,16 +276,23 @@ void	print(data *d)
 				break;
 			}
 			case 3:{
-				char *endptr;
-				long l = strtol(d->repr_t.c->c_str(), &endptr, 10);
-				if (l < 0 || l > 127)
-					d->table.c = false;
-				char c = static_cast<char>(l);
-				if (isprint(c))
-					d->repr_t.c->assign(std::string("'") += c).append("'");
+				if (d->len == 1 && std::isalpha(d->repr_t.c->at(0)))
+				{
+					std::cout << "char: " << d->repr_t.c->at(0) << "\n" << std::flush;
+				}
 				else
-					d->repr_t.c->assign("Non Displayable");
-				std::cout << "char:" << (d->table.c ? *d->repr_t.c : std::string("Impossible")) << "\n" << std::flush;
+				{
+					char *endptr;
+					long l = strtol(d->repr_t.c->c_str(), &endptr, 10);
+					if (l < 0 || l > 127)
+						d->table.c = false;
+					char c = static_cast<char>(l);
+					if (isprint(c))
+						d->repr_t.c->assign(std::string("'") += c).append("'");
+					else
+						d->repr_t.c->assign("Non Displayable");
+					std::cout << "char:" << (d->table.c ? *d->repr_t.c : std::string("Impossible")) << "\n" << std::flush;
+				}
 				break;
 			}
 		}
