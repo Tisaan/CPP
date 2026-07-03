@@ -5,32 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 17:49:41 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 17:35:44 by tseche           ###   ########.fr       */
+/*   Created: 2026/06/10 16:15:23 by rcompain          #+#    #+#             */
+/*   Updated: 2026/06/30 16:10:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Base.hpp"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
 
-int main()
-{
+int main(){
+	std::srand(std::time(NULL));
+
+	for (int i = 0; i < 6; i++)
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
+		Base* p = generate();
+
+		identify(p);
+		identify(*p);
+
+		delete p;
 	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.attack();
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
+
 	return 0;
 }

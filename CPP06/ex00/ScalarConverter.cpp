@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/29 14:58:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/06/30 14:07:00 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void fother(data *d)
 		d->table.f = false;
 		add_char(d);
 		d->end = true;
-	} else if (*d->str == std::string("-inf") || *d->str == std::string("+inf") || *d->str == std::string("nan"))
+	} else if (*d->str == std::string("-inf") || *d->str == std::string("+inf") || *d->str == std::string("nan") || *d->str == std::string("inf"))
 	{
 		d->table.c = false;
 		d->table.i = false;

@@ -5,32 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 17:49:41 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 17:35:44 by tseche           ###   ########.fr       */
+/*   Created: 2026/07/01 14:08:32 by tseche            #+#    #+#             */
+/*   Updated: 2026/07/01 14:12:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "t.hpp"
+#include <iostream>
 
-int main()
-{
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.attack();
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+int main(){
+
+	int a = 0;
+	int b = 1;
+	std::cout << "Max: " << max(a, b) << "\n" << std::flush;
+	std::cout << "Min: " << min(a, b) << "\n" << std::flush;
+	std::cout << "before swap: {a :" << a << ", b:" << b << "}\n" << std::flush;
+	swap(a, b);
+	std::cout << "after swap: {a :" << a << ", b:" << b << "}\n" << std::flush;
 }

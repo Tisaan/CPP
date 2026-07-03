@@ -6,15 +6,16 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/16 19:22:10 by tseche           ###   ########.fr        #
+#    Updated: 2026/06/30 14:35:49 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = sed
-CFLAGS = -Call -Cerror -Cextra -std=c++98
+NAME = Serializer
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 CC	= c++
-SRCS = ./main.cpp
+SRCS = ./main.cpp \
+		./Serializer.cpp
 
 
 all: $(NAME)

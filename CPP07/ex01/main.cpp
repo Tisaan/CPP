@@ -5,32 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 17:49:41 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 17:35:44 by tseche           ###   ########.fr       */
+/*   Created: 2026/07/01 14:29:44 by tseche            #+#    #+#             */
+/*   Updated: 2026/07/01 14:31:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Iter.hpp"
 
-int main()
-{
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.attack();
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+void p(std::string &a){std::cout << a << "\n" << std::flush;};
+
+int main(){
+	std::string a[] = {"0", "1", "2", "3", "4", "5"};
+	iter(a, 6, p);
 }

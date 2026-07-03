@@ -5,32 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 17:49:41 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 17:35:44 by tseche           ###   ########.fr       */
+/*   Created: 2026/07/03 11:55:09 by tseche            #+#    #+#             */
+/*   Updated: 2026/07/03 13:20:09 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "easyfind.hpp"
+#include <vector>
 
-int main()
-{
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.attack();
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+
+int main(){
+	std::vector<int> a = {1, 2, 3, 4, 5};
+	int search = 3;
+	int res = easyfind(a, search);
+	if (res != __INT32_MAX__)
+		std::cout << "find: [" << res << "]\n" << std::flush;
+	else
+		std::cout << "not find\n" << std::flush;
+
+	search = 12;
+	res = easyfind(a, search);
+	if (res != __INT32_MAX__)
+		std::cout << "find: [" << res << "]\n" << std::flush;
+	else
+		std::cout << "not find\n" << std::flush;
 }
