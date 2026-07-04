@@ -6,19 +6,19 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:16:12 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/27 17:43:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/04 14:07:32 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Dog::Dog(){
+Dog::Dog(): Animal(){
 	std::cout << "|Dog| default constructor called\n" << std::flush;
 	this->type = "Dog";
 	this->b = new Brain();
 }
 
-Dog::Dog(const Dog &dog){
+Dog::Dog(const Dog &dog): Animal(){
 	std::cout << "|Dog| default constructor called\n" << std::flush;
 	if (this != &dog)
 		*this = dog;

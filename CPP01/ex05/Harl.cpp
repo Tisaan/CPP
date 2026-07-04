@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:46:08 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/16 20:13:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/04 16:45:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,20 @@ void Harl::error(){
 
 void Harl::complain(std::string level)
 {
-	static std::map<std::string, MethodPtr> methods;
-	methods["DEBUG"] = &Harl::debug;
-	methods["INFO"] = &Harl::info;
-	methods["WARNING"] = &Harl::warning;
-	methods["ERROR"] = &Harl::error;
-	std::map<std::string, MethodPtr>::iterator it = methods.find(level);
-	if (it != methods.end())
-		(this->*(it->second))();
+	struct MethodInfo {
+		std::string name;
+		void (Harl::*method)();
+	};
+	
+	static const MethodInfo methods[] = {
+		{"DEBUG", &Harl::debug},
+		{"INFO", &Harl::info},
+		{"WARNING", &Harl::warning},
+		{"ERROR", &Harl::error}
+	};
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == methods[i].name)
+			(this->*methods[i].method)();
+	}
 }

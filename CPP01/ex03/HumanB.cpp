@@ -6,13 +6,13 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:41:59 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/16 18:27:49 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/04 16:41:41 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name){
+HumanB::HumanB(std::string name): weapon(NULL){
 	this->name = name;
 }
 

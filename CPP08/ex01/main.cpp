@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 19:01:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 19:20:40 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/04 14:58:26 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main()
 {
+	std::srand(time(NULL));
 	Span s(10000);
 	std::cout << "Test 10000 number\n" << std::flush;
 	for (int i = 0; i < 10000; i++)
@@ -36,7 +37,7 @@ int main()
 	sp.addNumber(17);
 	sp.addNumber(9);
 	sp.addNumber(11);
-	//expected; {.max[2], .min[14]}
+	//expected; {.max[14], .min[2]}
 	std::cout << "max[" << sp.longestSpan() << "]\n" << std::flush;
 	std::cout << "min[" << sp.shortestSpan() << "]\n" << std::flush;
 
@@ -56,6 +57,7 @@ int main()
 		std::cout << e.what() << "\n" << std::flush;
 	}
 	Span spa = Span(1);
+	spa.addNumber(0);
 	try {
 		spa.longestSpan();
 	}

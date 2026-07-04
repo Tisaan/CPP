@@ -6,11 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 17:51:45 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/03 19:19:23 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/04 14:57:52 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <algorithm>
+#include <vector>
+#include <climits>
 
 Span::Span(): idx(0), max(0){
 	std::cout << "|Span| default constructor called\n" << std::flush;
@@ -55,26 +58,34 @@ size_t Span::longestSpan(){
 	if (this->idx == 0 || this->idx == 1)
 		throw std::runtime_error("Type Error: method longestSpan couldn't work on " + std::to_string(this->idx) + " lenght Span");
 	size_t max = 0;
+	size_t min = UINT_MAX;
 	for (size_t i = 0; i < this->idx - 1; i++)
 	{
-		int tmp = this->GArray[i] - this->GArray[i + 1];
-		if (std::abs(tmp) > max)
-			max = tmp;
+		size_t t = this->GArray[i];
+		if (t > max)
+			max = t;
+		else if (t < min)
+			min = t;
 	}
-	return (max);
+	return (max - min);
 }
 
 
 size_t Span::shortestSpan(){
 	if (this->idx == 0 || this->idx == 1)
 		throw std::runtime_error("Type Error: method longestSpan couldn't work on " + std::to_string(this->idx) + " lenght Span");
-	size_t max = 0;
-	for (size_t i = 0; i < this->idx - 1; i++)
+	
+	size_t *tmp = this->GArray;
+	std::sort(tmp, tmp + this->idx);
+	size_t min = UINT_MAX;
+	for (int i = 1; i < this->idx; i++)
 	{
-		int tmp = this->GArray[i] - this->GArray[i + 1];
-		if (std::abs(tmp) < max)
-			max = tmp;
+		size_t cur = tmp[i] - tmp[i - 1];
+		if (cur < min)
+			min = cur;
+		if (min == 0)
+			return 0;
 	}
-	return (max);
+	return (min);
 }
 
