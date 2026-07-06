@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:46:08 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/02 15:15:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/06 09:47:21 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,16 @@ void Harl::complain(std::string level)
 		//je sais que c dumb asf mais j'avais design
 		//l'ex sans les switch case en tete
 		switch (print)
+		{
 			case 1:{
 				std::cout << "[ " << methods[i].name << " ]\n" << std::flush;
 				(this->*methods[i].method)();
 				std::cout << "\n" << std::flush;
 			}
+			default:{
+				break;
+			}
+		}
 	}
 	if (!print)
 		std::cout << "[ Probably complaining about insignificant problems ]\n" << std::flush;
