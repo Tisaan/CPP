@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 17:51:45 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/04 14:57:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/06 15:07:01 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ Span::Span(): idx(0), max(0){
 Span::Span(const Span&s): idx(0), max(s.max) {
 	std::cout << "|Span| Copy constructor called\n" << std::flush;
 	if (this != &s)
-		*this = s;
+	{
+		this->GArray = new size_t[max];
+		for (int i = 0; i < idx; i++)
+			this->GArray[i] = s.GArray[i];
+		for (size_t i = this->idx; i < max; i++)
+			this->GArray[i] = 0;
+	}
 }
 
 Span::Span(size_t n): idx(0), max(n){

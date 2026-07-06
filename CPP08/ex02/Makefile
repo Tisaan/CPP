@@ -6,16 +6,15 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/04 18:24:07 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/06 13:42:46 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = MutanStack
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -g -std=c++98
 CC	= c++
-SRCS =  ./MutantStack.cpp \
-		./main.cpp \
+SRCS = ./main.cpp \
 
 
 all: $(NAME)
