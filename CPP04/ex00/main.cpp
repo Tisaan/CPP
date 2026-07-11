@@ -6,12 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:22:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/27 16:16:59 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 15:20:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "WrongAnimal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
 
 int main()
 {

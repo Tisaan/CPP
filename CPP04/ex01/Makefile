@@ -6,13 +6,13 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/27 17:17:51 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/10 16:12:53 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = Animal
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -g -std=c++98
 CC	= c++
 SRCS =  ./main.cpp \
 		./Animal.cpp \
@@ -24,7 +24,7 @@ SRCS =  ./main.cpp \
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 	
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

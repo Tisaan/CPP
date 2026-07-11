@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/04/22 15:27:53 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/11 14:27:48 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS =  ./ClapTrap.cpp \
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 	
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

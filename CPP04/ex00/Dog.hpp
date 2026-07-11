@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 16:22:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/11 15:09:11 by tseche           ###   ########.fr       */
+/*   Created: 2026/07/11 15:19:25 by tseche            #+#    #+#             */
+/*   Updated: 2026/07/11 15:19:39 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
 
-int main()
-{
-	
-	Animal *arr[100];
-	for (int i = 0; i < 100; i++){
-		if (i < 50)
-			arr[i] = new Dog();
-		else
-			arr[i] = new Cat();
-	}
+class Dog: public Animal{
+	protected:
+		std::string type;
+	public:
+		Dog();
+		Dog(Dog &Dog);
+		~Dog();
 
-	for (Animal *an: arr){
-		delete an;
-	}
-	return 0;
-}
+		Dog &operator=(Dog &dog);
+		std::string getType() const;
+		void makeSound() const;
+};

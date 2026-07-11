@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 16:39:48 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/27 17:45:08 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 15:15:46 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 Brain::Brain(const Brain &b){
 	std::cout << "|Brain| copy constructor called\n" <<std::flush;
-	if (this != &b)
-		*this = b;
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = b.ideas[i];
 }
 
 Brain::Brain(){
 	std::cout << "|Brain| default constructor called\n" <<std::flush;
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = "";
 }
 
 Brain::~Brain(){
@@ -27,7 +29,9 @@ Brain::~Brain(){
 }
 
 const Brain &Brain::operator=(const Brain &b){
-	if (this != &b)
-		*this = b;
-	return b;
+	if (this == &b)
+		return (*this);
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = b.ideas[i];
+	return (*this);
 }

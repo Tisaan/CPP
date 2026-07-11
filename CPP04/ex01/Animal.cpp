@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:48:30 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/27 17:42:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 16:47:39 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ Animal::Animal(){
 Animal::Animal(const Animal &animal){
 	std::cout << "|Animal| copy constructor called\n" << std::flush;
 	if (this != &animal)
-		*this = animal;
+		this->type = animal.getType();
 }
 
-const Animal &Animal::operator=(const Animal &animal){
+Animal &Animal::operator=(const Animal &animal){
+
+	std::cout << "|Animal| copy assignment constructor called\n" << std::flush;
 	if (this != &animal)
-		*this = animal;
-	return animal;
+		this->type = animal.getType();
+	return (*this);
 }
 
-std::string Animal::getType() const{
+inline std::string Animal::getType() const{
 	return this->type;
 }
 

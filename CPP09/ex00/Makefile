@@ -6,18 +6,16 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/11 14:28:01 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/10 14:58:24 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = claptrap
+NAME = btc
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 CC	= c++
-SRCS =  ./ClapTrap.cpp \
-		./main.cpp \
-		./ScavTrap.cpp \
-		./FragTrap.cpp \
+SRCS =  ./main.cpp \
+		./BitcoinExchange.cpp \
 
 
 all: $(NAME)

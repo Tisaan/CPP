@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:09:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/22 15:22:24 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:57:06 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 class ClapTrap{
-	private:
+	protected:
 		std::string name;
 		int hit;
 		int energy;
@@ -23,10 +23,10 @@ class ClapTrap{
 	public:
 		ClapTrap();
 		ClapTrap(std::string &name);
-		ClapTrap(ClapTrap &clap);
+		ClapTrap(const ClapTrap &clap);
 		~ClapTrap();
 
-		ClapTrap &operator=(ClapTrap &clap);
+		ClapTrap &operator=(const ClapTrap &clap);
 
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);

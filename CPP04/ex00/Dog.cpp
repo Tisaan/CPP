@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:16:12 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/04 14:05:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 15:20:37 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "Dog.hpp"
 
 Dog::Dog(): Animal(){
 	std::cout << "|Dog| default constructor called\n" << std::flush;

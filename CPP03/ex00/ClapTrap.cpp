@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:09:23 by tseche            #+#    #+#             */
-/*   Updated: 2026/04/22 16:24:32 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 16:04:17 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ ClapTrap::ClapTrap(){
 	this->name = std::string("george");
 	this->energy = 10;
 	this->hit = 10;
-	this->attack_d = 10;
+	this->attack_d = 0;
 }
 
-ClapTrap::ClapTrap(ClapTrap &clap){
+ClapTrap::ClapTrap(const ClapTrap &clap){
 	std::cout << "|Claptrap| copy constructor called\n" << std::flush;
 	*this = clap;
 }
@@ -31,10 +31,10 @@ ClapTrap::ClapTrap(std::string &name){
 	this->name = name;
 	this->energy = 10;
 	this->hit = 10;
-	this->attack_d = 10;
+	this->attack_d = 0;
 }
 
-ClapTrap &ClapTrap::operator=(ClapTrap &clap) {
+ClapTrap &ClapTrap::operator=(const ClapTrap &clap) {
 	if (this != &clap)
 		*this = clap;
 	return (*this);
@@ -47,7 +47,7 @@ ClapTrap::~ClapTrap(){
 //
 
 void ClapTrap::attack(const std::string &target){
-	if (this->energy == 0 || this->hit == 0){
+	if (this->energy == 0 || this->hit <= 0){
 		std::cout << "|Claptrap| couldn't do anything, no energy/hit point left\n" << std::flush;
 		return;
 	}
@@ -57,7 +57,7 @@ void ClapTrap::attack(const std::string &target){
 }
 
 void ClapTrap::beRepaired(unsigned int amount){
-	if (this->energy == 0){
+	if (this->energy == 0 || this->hit <= 0){
 		std::cout << "|Claptrap| couldn't abything, no energy/hit point left\n" << std::flush;
 		return;
 	}
@@ -67,7 +67,7 @@ void ClapTrap::beRepaired(unsigned int amount){
 }
 
 void ClapTrap::takeDamage(unsigned int amount){
-	if (this->hit == 0){
+	if (this->hit <= 0){
 		std::cout << "|Claptrap| " << this->name << " is already dead.\n" << std::flush;
 		return;
 	}

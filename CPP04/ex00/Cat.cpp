@@ -6,11 +6,12 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:22:01 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/04 14:04:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/11 15:20:26 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "Cat.hpp"
 
 Cat::Cat(): Animal(){
 	std::cout << "|Cat| default constructor called\n" << std::flush;
