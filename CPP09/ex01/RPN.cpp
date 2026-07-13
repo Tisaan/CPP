@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 19:17:58 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/13 19:36:33 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/13 20:53:52 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ float RPN::sub(int a, int b){
 	return (a - b);
 }
 
-float RPN::add(int a, int b){
+float RPN::mul(int a, int b){
 	if ((long)(a * b) > INT_MAX)
 		return (NAN);
 	return (a * b);
 }
 
-float RPN::add(int a, int b){
+float RPN::div(int a, int b){
 	if (b == 0)
 		return (NAN);
 	return (a / b);
@@ -61,14 +61,13 @@ typedef float (RPN::*func)(int, int);
 
 int RPN::evaluate(const std::string &s){
 	struct ftable{
-		char type;
 		func callback;
 	};
 
-	const ftable table[] = {
-		{.type = '+', .callback=&RPN::add},
-		{.type = '-', .callback=&RPN::sub},
-		{.type = '*', .callback=&RPN::mul},
-		{.type = '/', .callback=&RPN::div}
+	const ftable table[48] = {
+		['+'] = {.callback=&RPN::add},
+		['-'] = {.callback=&RPN::sub},
+		['*'] = {.callback=&RPN::mul},
+		['/'] = {.callback=&RPN::div}
 	};
 }

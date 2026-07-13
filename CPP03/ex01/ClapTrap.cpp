@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:09:23 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/11 16:08:09 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/13 21:19:26 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ ClapTrap::ClapTrap(std::string &name){
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &clap) {
 	if (this != &clap)
-		*this = clap;
+	{
+		this->name = clap.name;
+		this->energy = clap.energy;
+		this->hit = clap.hit;
+		this->attack_d = clap.attack_d;
+	}
 	return (*this);
 }
 

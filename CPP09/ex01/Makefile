@@ -6,7 +6,7 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/13 18:51:58 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/13 20:53:16 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = RPN
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 CC	= c++
 SRCS =  ./main.cpp \
-		./BitcoinExchange.cpp \
+		./RPN.cpp \
 
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:16:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/11 16:07:33 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/13 21:20:50 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ FragTrap::FragTrap(const FragTrap &scav): ClapTrap(){
 
 FragTrap::FragTrap(const std::string &s){
 	std::cout << "|Scavtrap| naming constructor called\n" << std::flush;
-	this->name = name;
+	this->name = s;
 	this->energy = 30;
 	this->hit = 100;
 	this->attack_d = 100;
@@ -35,7 +35,12 @@ FragTrap::FragTrap(const std::string &s){
 
 FragTrap &FragTrap::operator=(const FragTrap &scav){
 	if (this != &scav)
-		*this = scav;
+	{
+		this->name = scav.name;
+		this->energy = scav.energy;
+		this->hit = scav.hit;
+		this->attack_d = scav.attack_d;
+	}
 	return (*this);
 }
 
