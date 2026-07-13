@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:16:51 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/13 21:20:50 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/13 21:22:12 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ FragTrap::FragTrap(const FragTrap &scav): ClapTrap(){
 FragTrap::FragTrap(const std::string &s){
 	std::cout << "|Scavtrap| naming constructor called\n" << std::flush;
 	this->name = s;
-	this->energy = 30;
-	this->hit = 100;
+	this->energy = 100;
+	this->hit = 30;
 	this->attack_d = 100;
 }
 
