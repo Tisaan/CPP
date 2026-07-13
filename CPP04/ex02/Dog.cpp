@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:16:12 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/11 15:08:39 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/13 21:40:53 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ Dog::Dog(const Dog &dog): Animal(){
 
 const Dog &Dog::operator=(const Dog &dog){
 	if (this != &dog)
-		*this = dog;
+	{
+		Animal::operator=(dog);
+		*this->b = *dog.b;
+	}
 	return (dog);
 }
 
