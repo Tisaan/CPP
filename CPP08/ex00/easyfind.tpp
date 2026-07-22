@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 11:44:45 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/04 14:55:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:49:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 template <typename T> int easyfind(T &list, int needle)
 {
 	typename T::iterator it = std::find(list.begin(), list.end(), needle);
-	if (*it == needle)
+	if (it != list.end())
 		return (*it);
-	return UINT_MAX;
+	return INT_MAX;
 }

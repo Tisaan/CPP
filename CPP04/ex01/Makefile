@@ -6,32 +6,33 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/10 16:12:53 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 15:06:26 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = Animal
-CFLAGS = -Wall -Werror -Wextra -g -std=c++98
-CC	= c++
+NAME = Brain
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
 SRCS =  ./main.cpp \
 		./Animal.cpp \
 		./Dog.cpp \
 		./Cat.cpp \
-		./Brains.cpp \
+		./Brains.cpp 
 
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

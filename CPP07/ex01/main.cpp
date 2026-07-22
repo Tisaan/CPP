@@ -6,13 +6,16 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:29:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/01 14:31:59 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:30:30 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Iter.hpp"
 
-void p(std::string &a){std::cout << a << "\n" << std::flush;};
+void p(std::string &a)
+{
+	std::cout << a << "\n" << std::flush;
+};
 
 int main(){
 	std::string a[] = {"0", "1", "2", "3", "4", "5"};

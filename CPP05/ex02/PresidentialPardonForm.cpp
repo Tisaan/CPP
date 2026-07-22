@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 13:53:54 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:53:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:22:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "fstream"
 
 PresidentialPardonForm::PresidentialPardonForm():
-	target("Home"),
-	AForm("PresidentialPardonForm", 25, 5)
+	AForm("PresidentialPardonForm", 25, 5),
+	target("Home")
 {
 	std::cout << "|PresidentialPardonForm| default constructor called\n" << std::flush;
 };
@@ -36,7 +36,10 @@ AForm("PresidentialPardonForm", 25, 5)
 	this->target = t;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm(){std::cout << "|PresidentialPardonForm| destructor called\n" << std::flush;}
+PresidentialPardonForm::~PresidentialPardonForm() throw()
+{
+	std::cout << "|PresidentialPardonForm| destructor called\n" << std::flush;
+}
 
 const PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &s)
 {

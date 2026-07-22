@@ -6,34 +6,36 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/25 13:42:05 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 15:23:31 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = Form
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-CC	= c++
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
 SRCS =  ./main.cpp \
-		./Bureaucrat.cpp \
-		./AForm.cpp \
-		./ShrubberyCreationForm.cpp \
-		./RobotomyRequestForm.cpp \
-		./PresidentialPardonForm.cpp \
-		./Intern.cpp
+        ./Bureaucrat.cpp \
+        ./AForm.cpp \
+        ./ShrubberyCreationForm.cpp \
+        ./RobotomyRequestForm.cpp \
+        ./PresidentialPardonForm.cpp \
+		./Intern.cpp \
 
+
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

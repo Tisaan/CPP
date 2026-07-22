@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 14:18:18 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/30 14:33:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:14:04 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main(){
 	Data d = (Data){.field1 = 0, .field2 = 'c', .field3 = "chose"};
-	uintptr_t p = Serailizer::serialize(&d);
-	Data * nd = Serailizer::deserialize(p);
+	uintptr_t p = Serializer::serialize(&d);
+	Data * nd = Serializer::deserialize(p);
 	std::cout << "equal[" << (nd == &d) << "]\n" << std::flush;
 }

@@ -6,15 +6,17 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 18:09:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/06 13:49:17 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/19 14:28:12 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cmath>
 #include "MutantStack.hpp"
+#include <list>
 
 int main() {
+	std::cout << "MutantStack\n" << std::flush;
     MutantStack<int> mstack;
     mstack.push(5);
     mstack.push(17);
@@ -53,5 +55,28 @@ int main() {
 		last = lenght;
     }
 	std::cout << dec << "\n" << std::flush;
+
+
+	std::cout << "List\n" << std::flush;
+	std::list<int> lstack;
+	lstack.push_back(5);
+	lstack.push_back(17);
+	std::cout << "top: "<< lstack.back() << std::endl;
+	lstack.pop_back();
+	std::cout << "size: " << lstack.size() << std::endl;
+	lstack.push_back(3);
+	lstack.push_back(5);
+	lstack.push_back(737);
+	lstack.push_back(0);
+	std::list<int>::iterator lit = lstack.begin();
+	std::list<int>::iterator lite = lstack.end();
+	++lit;
+	--lit;
+	std::cout << "size: " << lstack.size() << std::endl;
+	while (lit != lite)
+	{
+	std::cout << *lit << std::endl;
+		++lit;
+	}
     return 0;
 }

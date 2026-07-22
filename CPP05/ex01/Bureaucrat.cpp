@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 15:09:47 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 13:41:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:12:20 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Bureaucrat::Bureaucrat(const std::string s, int g)
 	this->setGrade(g);
 }
 
-Bureaucrat::~Bureaucrat()
+Bureaucrat::~Bureaucrat() throw()
 {
 	std::cout << "|Bureaucrat| default destructor called\n" << std::flush;
 }
@@ -79,6 +79,6 @@ void	Bureaucrat::signForm(Form &b){
 		std::cout << b.getName() << "signed" << this->getName() << '\n' << std::flush;
 	}catch (std::exception &e)
 	{
-		std::cout << b.getName() << "couldn't sign" << this->getName() << "'cause of a grade too low\n" << std::flush;
+		std::cout << b.getName() << " couldn't sign " << this->getName() << " 'cause of a grade too low\n" << std::flush;
 	}
 }

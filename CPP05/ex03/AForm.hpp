@@ -26,7 +26,7 @@ class AForm: public std::exception{
 		AForm();
 		AForm(const AForm& other);
 		AForm(const std::string &name, int grade, int exec);
-		~AForm();
+		~AForm() throw();
 
 		const AForm& operator=(const AForm& other);
 		std::string getName() const ;

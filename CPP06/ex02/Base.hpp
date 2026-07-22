@@ -6,18 +6,21 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 15:09:09 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/30 16:07:26 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:23:22 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <cstdint>
+#include <stdint.h>
 #include <iostream>
 #include <cstring>
+#include <cmath>
 #include "Register.hpp"
 
 const std::size_t MAX_DERIVED_CLASS = 3;
+
+class Base;
 
 struct ChildClassInfo {
     std::string className;
@@ -30,19 +33,9 @@ class Base{
 };
 
 static ChildClassInfo ChildClassName[MAX_DERIVED_CLASS];
-static std::size_t ChildCount;
-static Base* create(const std::string& className) { 		 	
-    for (size_t i = 0; i < ChildCount; ++i) {
-        if (ChildClassName[i].className == className) {
-            return ChildClassName[i].creator();
-        }
-    }
-    return 0; // Return nullptr if class not found
-}
+static std::size_t ChildCount = 0;
+Base* create(const std::string& className);
 
 Base *generate();
 void identify(Base *b);
 void identify(Base &b);
-
-ChildClassInfo ChildClassName[MAX_DERIVED_CLASS];
-size_t ChildCount = 0;

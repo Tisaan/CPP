@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 13:48:58 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:42:05 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:27:29 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class PresidentialPardonForm: public AForm{
 		PresidentialPardonForm();
 		PresidentialPardonForm(const PresidentialPardonForm& other);
 		PresidentialPardonForm(const std::string &t);
-		~PresidentialPardonForm();
+		~PresidentialPardonForm() throw();
 
 		const PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 

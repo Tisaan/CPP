@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:22:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/11 15:09:11 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:01:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+#define  ARRAY_SIZE 100
+
 int main()
 {
-	
-	Animal *arr[100];
-	for (int i = 0; i < 100; i++){
-		if (i < 50)
+	Animal *arr[ARRAY_SIZE];
+	for (int i = 0; i < ARRAY_SIZE; i++){
+		if (i < (ARRAY_SIZE / 2))
 			arr[i] = new Dog();
 		else
 			arr[i] = new Cat();
 	}
 
-	for (Animal *an: arr){
-		delete an;
+	for (size_t i = 0; i < ARRAY_SIZE; i++){
+		delete arr[i];
 	}
 	return 0;
 }

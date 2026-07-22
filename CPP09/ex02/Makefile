@@ -6,16 +6,15 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/15 17:13:51 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 21:25:27 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = RPN
+NAME = PmergeMe
 CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
 CXX	= c++
 SRCS =  ./main.cpp \
-		./RPN.cpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 

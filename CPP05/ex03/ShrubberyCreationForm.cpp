@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 13:53:54 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:38:03 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:26:54 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "fstream"
 
 ShrubberyCreationForm::ShrubberyCreationForm():
-	target("Home"),
-	AForm("ShrubberyCreationForm", 145, 137)
+	AForm("ShrubberyCreationForm", 145, 137),
+	target("Home")
 {
 	std::cout << "|ShrubberyCreationForm| default constructor called\n" << std::flush;
 };
@@ -36,7 +36,10 @@ AForm("ShrubberyCreationForm", 145, 137)
 	this->target = t;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(){std::cout << "|ShrubberyCreationForm| destructor called\n" << std::flush;}
+ShrubberyCreationForm::~ShrubberyCreationForm()throw()
+{
+	std::cout << "|ShrubberyCreationForm| destructor called\n" << std::flush;
+}
 
 const ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &s)
 {

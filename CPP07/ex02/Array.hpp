@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:37:43 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/01 18:07:02 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:32:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ template<typename T> class Array{
 		Array();
 		Array(size_t n);
 		Array(const Array<T> &a);
+		~Array();
 		const Array<T> &operator=(const Array<T> &a);
 		T &operator[](size_t n);
 		size_t size()const;

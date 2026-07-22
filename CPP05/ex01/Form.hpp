@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                          :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:13:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 13:40:37 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:08:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Form: public std::exception{
 		Form();
 		Form(const Form& other);
 		Form(const std::string &name, int grade, int exec);
-		~Form();
+		~Form() throw();
 
 		const Form& operator=(const Form& other);
 		std::string getName() const ;

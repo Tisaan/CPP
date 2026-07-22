@@ -6,26 +6,39 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:23:37 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:53:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:19:34 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm(): grade(1), exec(1), name("A Document"), sign(false){std::cout << "|AForm| default constructor called\n" << std::flush;};
+AForm::AForm():
+	name("A Document"), sign(false), grade(1), exec(1)
+{
+	std::cout << "|AForm| default constructor called\n" << std::flush;
+};
 
-AForm::AForm(const AForm &f): grade(f.getSignGrade()), exec(f.getExecGrade()), name(f.getName()), sign(f.getSignature())
+AForm::AForm(const AForm &f):
+	name(f.getName()),
+	sign(f.getSignature()),
+	grade(f.getSignGrade()),
+	exec(f.getExecGrade())
 {
 	std::cout << "|AForm| copy constructor called\n" << std::flush;
 	if (this != &f)
 		*this = f;
 }
 
-AForm::AForm(const std::string &name, int grade, int exec): name(name), grade(checkGrade(grade)), exec(checkGrade(exec)), sign(false){
+AForm::AForm(const std::string &name, int grade, int exec):
+	name(name), sign(false), grade(checkGrade(grade)), exec(checkGrade(exec))
+{
 	std::cout << "|AForm| argument constructor called\n" << std::flush;
 }
 
-AForm::~AForm(){std::cout << "|AForm| destructor called\n" << std::flush;}
+AForm::~AForm() throw()
+{
+	std::cout << "|AForm| destructor called\n" << std::flush;
+}
 
 const AForm &AForm::operator=(const AForm &s)
 {

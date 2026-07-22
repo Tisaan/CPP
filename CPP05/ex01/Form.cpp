@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                          :+:      :+:    :+:   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:23:37 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 13:40:30 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:13:14 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form(): grade(1), exec(1), name("A Document"), sign(false){std::cout << "|Form| default constructor called\n" << std::flush;};
+Form::Form():
+	name("A Document"), sign(false), grade(1), exec(1)
+{
+	std::cout << "|Form| default constructor called\n" << std::flush;
+};
 
-Form::Form(const Form &f): grade(f.getSignGrade()), exec(f.getExecGrade()), name(f.getName()), sign(f.getSignature())
+Form::Form(const Form &f):
+	name(f.getName()),
+	sign(f.getSignature()),
+	grade(f.getSignGrade()),
+	exec(f.getExecGrade())
 {
 	std::cout << "|Form| copy constructor called\n" << std::flush;
 	if (this != &f)
 		*this = f;
 }
 
-Form::Form(const std::string &name, int grade, int exec): name(name), grade(checkGrade(grade)), exec(checkGrade(exec)), sign(false){
+Form::Form(const std::string &name, int grade, int exec):
+	name(name),
+	sign(false),
+	grade(checkGrade(grade)),
+	exec(checkGrade(exec))
+{
 	std::cout << "|Form| argument constructor called\n" << std::flush;
 }
 
-Form::~Form(){std::cout << "|Form| destructor called\n" << std::flush;}
+Form::~Form()throw() {std::cout << "|Form| destructor called\n" << std::flush;}
 
 const Form &Form::operator=(const Form &s)
 {
@@ -64,6 +77,6 @@ const char *Form::GradeTooLowException::what() const throw() {
 
 std::ostream &operator<<(std::ostream &s, const Form &f)
 {
-	s << "Form:" << f.getName() << ", sign:" << f.getSignature() << "\n" << std::flush;
+	s << "Form: " << f.getName() << ", sign: " << f.getSignature() << "\n" << std::flush;
 	return (s);
 }

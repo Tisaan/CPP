@@ -6,28 +6,30 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/01 14:12:47 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 16:29:26 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = template
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-CC	= c++
-SRCS = ./main.cpp
+NAME = Template
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
+SRCS =  ./main.cpp \
 
+
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

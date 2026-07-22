@@ -6,16 +6,17 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 13:53:54 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:40:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:22:00 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include "fstream"
+#include <cmath>
 
 RobotomyRequestForm::RobotomyRequestForm():
-	target("Home"),
-	AForm("RobotomyRequestForm", 72, 45)
+	AForm("RobotomyRequestForm", 72, 45),
+	target("Home")
 {
 	std::cout << "|RobotomyRequestForm| default constructor called\n" << std::flush;
 };
@@ -36,7 +37,10 @@ AForm("RobotomyRequestForm", 72, 45)
 	this->target = t;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm(){std::cout << "|RobotomyRequestForm| destructor called\n" << std::flush;}
+RobotomyRequestForm::~RobotomyRequestForm() throw()
+{
+	std::cout << "|RobotomyRequestForm| destructor called\n" << std::flush;
+}
 
 const RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &s)
 {
@@ -51,7 +55,7 @@ const RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestF
 void RobotomyRequestForm::execute(const Bureaucrat &b)const{
 	checkexec(b);
 	std::cout << "[drilling noises]\n" << std::flush;
-	if (std::rand() % 2)
+	if (rand() % 2)
 		std::cout << "The robotomy has been successfull\n" << std::flush;
 	else
 		std::cout << "The robotomy has failed miserably\n" << std::flush;

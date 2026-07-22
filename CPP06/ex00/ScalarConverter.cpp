@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/30 14:07:00 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/22 15:04:16 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void check(data *d)
 		f = d->str->find('.');
 		std::string::iterator it = d->str->begin();
 		int count = 0;
-		for (; it < d->str->end(); it++)
+		for (; it < d->str->end(); ++it)
 		{
 			if (*it == '.')
 				count++;
@@ -160,6 +160,11 @@ void check(data *d)
 			{
 				d->repr_t.f->insert(0, 1, '0');
 				d->repr_t.d->insert(0, 1, '0');
+			}
+			if (d->str->at(d->str->length() - 1) == '.')
+			{
+				d->repr_t.f->append("0");
+				d->repr_t.d->append("0");
 			}
 		}
 	}
@@ -321,12 +326,24 @@ void ScalarConverter::convert(std::string &s)
 		|| d->end)
 	{
 		print(d);
+		delete[] state_table;
+		delete d->repr_t.i;
+		delete d->repr_t.f;
+		delete d->repr_t.d;
+		delete d->repr_t.c;
+		delete d;
 		return ;
 	}
 	(change_state(d))(d);
 	if (d->end)
 	{
 		print(d);
+		delete[] state_table;
+		delete d->repr_t.i;
+		delete d->repr_t.f;
+		delete d->repr_t.d;
+		delete d->repr_t.c;
+		delete d;
 		return ;
 	}
 	rec++;

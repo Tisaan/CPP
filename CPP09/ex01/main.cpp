@@ -6,8 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 20:53:19 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/13 20:53:26 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/14 17:59:35 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(){}
+#include "RPN.hpp"
+
+int main(int ac, char **av){
+	if (ac != 2)
+		return (1);
+	RPN::evaluate(av[1]);
+}

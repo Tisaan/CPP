@@ -6,10 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 11:20:13 by rcompain          #+#    #+#             */
-/*   Updated: 2026/06/25 13:49:13 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:28:25 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cmath>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "Intern.hpp"
@@ -19,6 +20,7 @@
 
 int main( void )
 {
+	srand(time(NULL));
 	// Test 1 : Intern creates a ShrubberyCreationForm
 	std::cout << YELLOW << "Test 1 : Intern creates ShrubberyCreationForm" << RESET << std::endl;
 	{

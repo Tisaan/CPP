@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 19:13:08 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/13 19:24:55 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/14 17:57:57 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 #include <iostream>
 #include <cmath>
 #include <climits>
+#include <stack>
 
 class RPN{
-	float add(int a, int b);
-	float sub(int a, int b);
-	float mul(int a, int b);
-	float div(int a, int b);
 	public:
 		RPN();
 		RPN(const RPN &);
@@ -28,5 +25,5 @@ class RPN{
 		
 		RPN &operator=(const RPN &);
 		
-		int evaluate(const std::string &);
+		static int evaluate(const std::string &);
 };

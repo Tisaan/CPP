@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 15:07:17 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/06 12:30:52 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 17:11:43 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <deque>
 
 
-template <typename T, typename Cont = std::deque<T>>
-class MutantStack: public std::stack<T, Cont>{
+template <typename T>
+class MutantStack: public std::stack<T>{
 	public:
 		MutantStack(){
 			std::cout << "|Mutant| default constructor called\n" << std::flush;
@@ -28,28 +28,28 @@ class MutantStack: public std::stack<T, Cont>{
 				if (this != &m)
 					*this = m;
 		}
-		const MutantStack<T, Cont> &operator=(const MutantStack<T, Cont> &m){
+		const MutantStack<T> &operator=(const MutantStack<T> &m){
 			std::cout << "|Mutant| assignment copy constructor called\n" << std::flush;
 			if (this == &m)
 				return *this;
-			std::stack<T, Cont>::operator=(m);
+			std::stack<T>::operator=(m);
 			return (*this);
 		}
 		~MutantStack(){std::cout << "|Mutant| destructor called\n" << std::flush;
 		}
-		typename std::deque<T, Cont>::iterator begin(){
+		typename std::deque<T>::iterator begin(){
 			return (this->c.begin());
 		}
 
-		typename std::deque<T, Cont>::iterator end(){
+		typename std::deque<T>::iterator end(){
 			return (this->c.end());
 		}
 
-		typename std::deque<T, Cont>::const_iterator begin() const{
+		typename std::deque<T>::const_iterator begin() const{
 			return (this->c.begin());
 		}
 
-		typename std::deque<T, Cont>::const_iterator end() const {
+		typename std::deque<T>::const_iterator end() const {
 			return (this->c.end());
 		}
 };

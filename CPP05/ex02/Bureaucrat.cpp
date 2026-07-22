@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 15:09:47 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:55:00 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:15:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Bureaucrat::Bureaucrat(const std::string s, int g)
 	this->setGrade(g);
 }
 
-Bureaucrat::~Bureaucrat()
+Bureaucrat::~Bureaucrat() throw()
 {
 	std::cout << "|Bureaucrat| default destructor called\n" << std::flush;
 }

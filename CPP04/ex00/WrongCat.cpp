@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongwrongCat.cpp                                       :+:      :+:    :+:   */
+/*   WrongWrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,33 +11,33 @@
 /* ************************************************************************** */
 
 
-#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
-wrongCat::wrongCat(){
-	std::cout << "|wrongCat| default constructor called\n" << std::flush;
-	this->type = "wrongCat";
+WrongCat::WrongCat(){
+	std::cout << "|WrongCat| default constructor called\n" << std::flush;
+	this->type = "WrongCat";
 }
 
-wrongCat::wrongCat(wrongCat &wrongCat){
-	std::cout << "|wrongCat| default constructor called\n" << std::flush;
-	if (this != &wrongCat)
-		*this = wrongCat;
+WrongCat::WrongCat(WrongCat &WrongCat){
+	std::cout << "|WrongCat| default constructor called\n" << std::flush;
+	if (this != &WrongCat)
+		*this = WrongCat;
 }
 
-wrongCat &wrongCat::operator=(wrongCat &wrongCat){
-	if (this != &wrongCat)
-		*this = wrongCat;
-	return (wrongCat);
+WrongCat &WrongCat::operator=(WrongCat &WrongCat){
+	if (this != &WrongCat)
+		*this = WrongCat;
+	return (WrongCat);
 }
 
-wrongCat::~wrongCat(){
-	std::cout << "|wrongCat| destructor called\n" << std::flush;
+WrongCat::~WrongCat(){
+	std::cout << "|WrongCat| destructor called\n" << std::flush;
 }
 
-std::string wrongCat::getType() const{
+std::string WrongCat::getType() const{
 	return this->type;
 }
 
-void wrongCat::makeSound() const{
+void WrongCat::makeSound() const{
 	std::cout << "<cat sound> but it seems kinda wrong\n" << std::flush;
 }

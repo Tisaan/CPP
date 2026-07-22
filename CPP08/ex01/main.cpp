@@ -6,19 +6,20 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 19:01:26 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/06 15:06:28 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:50:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <cmath>
 
 int main()
 {
-	std::srand(time(NULL));
+	srand(time(NULL));
 	Span s(10000);
 	std::cout << "Test 10000 number\n" << std::flush;
 	for (int i = 0; i < 10000; i++)
-		s.addNumber(std::rand());
+		s.addNumber(rand());
 	std::cout << "max[" << s.longestSpan() << "]\n" << std::flush;
 	std::cout << "min[" << s.shortestSpan() << "]\n" << std::flush;
 

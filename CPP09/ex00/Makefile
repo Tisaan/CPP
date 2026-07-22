@@ -6,29 +6,30 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/10 14:58:24 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 17:13:08 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = btc
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-CC	= c++
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
 SRCS =  ./main.cpp \
 		./BitcoinExchange.cpp \
 
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

@@ -6,28 +6,29 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/07/06 13:42:46 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 17:12:21 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = MutanStack
-CFLAGS = -Wall -Werror -Wextra -g -std=c++98
-CC	= c++
-SRCS = ./main.cpp \
+NAME = MutantStack
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
+SRCS =  ./main.cpp \
 
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

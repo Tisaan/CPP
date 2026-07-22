@@ -6,14 +6,16 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:22:34 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/13 21:39:49 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 14:53:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include <iostream>
 
 int main()
 {
@@ -21,28 +23,25 @@ int main()
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	const Animal *c = i;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	std::cout << "type:" << j->getType() << " " << std::endl;
+	std::cout << "type:" << i->getType() << " " << std::endl;
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
 	meta->makeSound();
+	(void)c;
 
 	delete meta;
 	delete j;
 	delete i;
 
-	const wrongAnimal* wmeta = new wrongAnimal();
-	const Animal* wj = new Dog();
-	const wrongAnimal* wi = new wrongCat();
-	std::cout << wj->getType() << " " << std::endl;
-	std::cout << wi->getType() << " " << std::endl;
+	const WrongAnimal* wmeta = new WrongAnimal();
+	const WrongAnimal* wi = new WrongCat();
+	std::cout << "type:" << wi->getType() << " " << std::endl;
 	wi->makeSound(); //will output the cat sound!
-	wj->makeSound();
 	wmeta->makeSound();
-
+	
 
 	delete wmeta;
-	delete wj;
 	delete wi;
 	return 0;
 }

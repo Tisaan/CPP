@@ -6,14 +6,11 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 15:26:39 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/30 16:10:21 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/18 18:09:56 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
-#ifndef REGISTER_HPP
-#define REGISTER_HPP
 
 #define REGISTER_DERIVED_CLASS(Derived) \
     namespace { \
@@ -28,5 +25,3 @@
             } \
         } Derived##_instance; \
     }
-
-#endif

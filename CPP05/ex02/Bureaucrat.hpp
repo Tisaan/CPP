@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:49:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/24 14:51:45 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:15:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Bureaucrat: public std::exception{
 		Bureaucrat();
 		Bureaucrat(const Bureaucrat& srcBureaucrat);
 		Bureaucrat(std::string name, int grade);
-		~Bureaucrat();
+		~Bureaucrat() throw();
 
 		const Bureaucrat& operator=(const Bureaucrat& srcBureaucrat);
 

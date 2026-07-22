@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 13:23:00 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/25 13:53:55 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 15:31:28 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ Intern::Intern(const Intern &f)
 		*this = f;
 }
 
-Intern::Intern(const std::string &name, int grade, int exec){
-	std::cout << "|Intern| argument constructor called\n" << std::flush;
-}
 
 Intern::~Intern(){std::cout << "|Intern| destructor called\n" << std::flush;}
 
 const Intern &Intern::operator=(const Intern &s)
 {
 	std::cout << "|Intern| copy assignement constructor called\n" << std::flush;
+	if (this != &s)
+	{
+		*this = s;
+	}
 	return *this;
 }
 

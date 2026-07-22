@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:13:30 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/01 18:29:10 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:39:07 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,22 @@ template<typename T> Array<T>::Array(size_t n): length(n){
 
 template<typename T> Array<T>::Array(const Array<T> &a): length(0){
 	std::cout  << "copy constructor called.\n" << std::flush;
-	this->list = new T();
+	this->list = new T[this->length];
 	for (size_t i = 0; i < this->length; i++)
 		this->list = 0;
 	*this = a;
 }
 
-template<typename T> Array<T>::Array(): length(0), list(0){std::cout  << "Default constructor called.\n" << std::flush;}
+template<typename T> Array<T>::Array(): list(0), length(0)
+{
+	std::cout  << "Default constructor called.\n" << std::flush;
+}
+
+template<typename T> Array<T>::~Array()
+{
+	std::cout  << "Destructor called.\n" << std::flush;
+	delete[] this->list;
+}
 
 template<typename T> const Array<T> & Array<T>::operator=(const Array<T> &a){
 	std::cout  << "assignment constructor called.\n" << std::flush;

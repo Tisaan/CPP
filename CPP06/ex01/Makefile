@@ -6,29 +6,31 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/06/30 14:35:49 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 16:09:37 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = Serializer
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-CC	= c++
-SRCS = ./main.cpp \
-		./Serializer.cpp
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX	= c++
+SRCS =  ./main.cpp \
+        ./Serializer.cpp \
 
+
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 	
 clean:
-#	@rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

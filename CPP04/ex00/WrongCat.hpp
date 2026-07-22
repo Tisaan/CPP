@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/24 13:48:58 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:17:26 by tseche           ###   ########.fr       */
+/*   Created: 2026/07/14 19:29:15 by tseche            #+#    #+#             */
+/*   Updated: 2026/07/14 19:29:58 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "AForm.hpp"
+#include "WrongAnimal.hpp"
 
-class ShrubberyCreationForm: public AForm{
-	std::string target;
+class WrongCat: public WrongAnimal{
+	protected:
+		std::string type;
 	public:
-		ShrubberyCreationForm();
-		ShrubberyCreationForm(const ShrubberyCreationForm& other);
-		ShrubberyCreationForm(const std::string &t);
-		~ShrubberyCreationForm() throw();
+		WrongCat();
+		WrongCat(WrongCat &cat);
+		~WrongCat();
 
-		const ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
-
-		void execute(const Bureaucrat &e) const;
+		WrongCat &operator=(WrongCat &cat);
+		std::string getType() const;
+		void makeSound() const;
 };
