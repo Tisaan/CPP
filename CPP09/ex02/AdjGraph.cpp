@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AdjGraph.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
+/*   By: von <von@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:12:03 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/21 20:02:54 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/22 15:25:36 by von              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,10 @@ void AdjGraph::swapGraph(AdjGraph &a){
 void AdjGraph::combineGraph(AdjGraph &a) noexcept{
 
 	int depth = this->inner->getDepth();
-	Node *node = this->getInnerTree()->getNode(depth);
+	Node *node;
 	if (this <= &a)
 	{
+		node = this->getInnerTree()->getNode(depth);
 		a.combine = true;
 		node->left = a.getInnerTree()->root;
 		this->getInnerTree()->depth += a.getInnerTree()->getDepth();
@@ -102,6 +103,12 @@ void AdjGraph::combineGraph(AdjGraph &a) noexcept{
 	}
 	else
 	{
-		this->combine
+		node = a.getInnerTree()->getNode(depth);
+		this->combine = true;
+		this->getInnerTree()->root;
+		a.getInnerTree()->depth += this->getInnerTree();
+		this->getAdjLeft()->setAdjRight(this);
+		this->getAdjRight()->setAdjLeft(this);
+		delete this
 	}
 }
