@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:13:28 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:08:13 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/30 10:22:40 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "Bureaucrat.hpp"
 
-class Form: public std::exception{
+class Form{
 	const std::string name;
 	bool	sign;
 	const int grade;

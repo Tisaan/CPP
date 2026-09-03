@@ -6,13 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:44 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/22 15:04:16 by tseche           ###   ########.fr       */
+/*   Updated: 2026/08/03 15:02:59 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <cstdlib>
 #include <cstring>
+#include <sstream>
 
 typedef struct s_table{
 	bool	i;
@@ -86,17 +87,47 @@ void	add_char(data *d){
 		switch (i){
 			case 0:{
 				if (d->table.i)
-					d->repr_t.i->insert(0, 1, c);
+				{
+					if (isdigit(c) || c == '.')
+						d->repr_t.i->insert(0, 1, c);
+					else
+					{
+						std::stringstream ss;
+						ss << static_cast<int>(c);
+						std::string tmp = ss.str();
+						d->repr_t.i->insert(0, tmp);
+					}	
+						
+				}
 				break;
 			}
 			case 1:{
-				if (d->table.f)
-					d->repr_t.f->insert(0, 1, c);
+				if (d->table.f){
+					if (isdigit(c) || c == '.' || (c == 'f'))
+						d->repr_t.f->insert(0, 1, c);
+					else
+					{
+						std::stringstream ss;
+						ss << static_cast<int>(c);
+						std::string tmp = ss.str();
+						d->repr_t.f->insert(0, tmp);
+					}
+				}
 				break;
 			}
 			case 2:{
 				if (d->table.d && c != 'f')
-					d->repr_t.d->insert(0, 1, c);
+				{
+					if (isdigit(c) || c == '.')
+						d->repr_t.d->insert(0, 1, c);
+					else
+					{
+						std::stringstream ss;
+						ss << static_cast<int>(c);
+						std::string tmp = ss.str();
+						d->repr_t.d->insert(0, tmp);
+					}
+				}
 				break;
 			}
 			case 3:{
@@ -123,6 +154,8 @@ void check(data *d)
 	size_t f;
 	if (d->point)
 	{
+		if (*d->str == std::string("."))
+			return ;
 		f = d->str->find('.');
 		std::string::iterator it = d->str->begin();
 		int count = 0;
@@ -156,17 +189,14 @@ void check(data *d)
 					d->repr_t.i->assign(d->str->substr(0, f))
 				);
 			}
-			else if (d->str->at(0) == '.')
-			{
-				d->repr_t.f->insert(0, 1, '0');
-				d->repr_t.d->insert(0, 1, '0');
-			}
-			if (d->str->at(d->str->length() - 1) == '.')
-			{
-				d->repr_t.f->append("0");
-				d->repr_t.d->append("0");
-			}
 		}
+	}
+	else
+	{
+		if (*d->str == std::string("f"))
+			return ;
+		d->repr_t.f->append(".0f");
+		d->repr_t.d->append(".0");
 	}
 }
 
@@ -174,7 +204,6 @@ void	fpoint(data *d)
 {
 	if (d->point)
 	{
-		
 		d->table.c = false;
 		d->table.d = false;
 		d->table.i = false;
@@ -182,20 +211,36 @@ void	fpoint(data *d)
 		d->end = true;
 		return ;
 	}
-	d->table.i = false;
-	d->table.c = false;
-	d->point = true;
-	add_char(d);
+	else if (*d->str == std::string(".")){
+		d->repr_t.i->assign("46");
+		d->repr_t.f->assign("46.0f");
+		d->repr_t.d->assign("46.0");
+		d->repr_t.c->assign(".");
+		d->table.c = true;
+		d->end = true;
+		d->point = true;
+		return ;
+	}
+	else {
+		d->point = true;
+		add_char(d);
+	}
 }
 
 void fother(data *d)
 {
 	if (d->len == 1 && std::isprint(d->str->at(d->len - *d->rec - 1)))
 	{
-		d->table.d = false;
-		d->table.i = false;
-		d->table.f = false;
-		add_char(d);
+		char c = d->str->at(d->len - *d->rec - 1);
+		if (c == 'f')
+		{std::cout << "enter\n" << std::flush;
+			d->repr_t.i->assign("102");
+			d->repr_t.f->assign("102.0f");
+			d->repr_t.d->assign("102.0");
+			d->repr_t.c->assign("f");
+		}
+		else
+			add_char(d);
 		d->end = true;
 	} else if (*d->str == std::string("-inf") || *d->str == std::string("+inf") || *d->str == std::string("nan") || *d->str == std::string("inf"))
 	{
@@ -273,35 +318,90 @@ void	print(data *d)
 				break;
 			}
 			case 1:{
+				if (d->repr_t.f->at(d->repr_t.f->length() - 1) != 'f')
+					d->repr_t.f->append("f");
+				if (d->repr_t.f->at(0) == '.')
+					d->repr_t.f->insert(0, 1, '0');
 				std::cout << "float:" << (d->table.f ? *d->repr_t.f : std::string("Impossible")) << "\n" << std::flush;
 				break;
 			}
 			case 2:{
+				if (d->repr_t.d->at(0) == '.')
+					d->repr_t.d->insert(0, 1, '0');
 				std::cout << "double:" << (d->table.d ? *d->repr_t.d : std::string("Impossible")) << "\n" << std::flush;
 				break;
 			}
 			case 3:{
 				if (d->len == 1 && std::isalpha(d->repr_t.c->at(0)))
 				{
-					std::cout << "char: " << d->repr_t.c->at(0) << "\n" << std::flush;
+					std::cout << "char:" << d->repr_t.c->at(0) << "\n" << std::flush;
 				}
 				else
 				{
-					char *endptr;
-					long l = strtol(d->repr_t.c->c_str(), &endptr, 10);
+					long l = strtol(d->repr_t.c->c_str(), NULL, 10);
 					if (l < 0 || l > 127)
 						d->table.c = false;
-					char c = static_cast<char>(l);
-					if (isprint(c))
-						d->repr_t.c->assign(std::string("'") += c).append("'");
+					bool check = false;
+					bool num = false;
+					size_t len = d->repr_t.c->length();
+					for (size_t i = 0; i < len; i++)
+					{
+						if (num == false && (d->repr_t.c->at(i) == '-' || d->repr_t.c->at(i) == '+'))
+							continue;
+						else if (isdigit(d->repr_t.c->at(i)))
+						{
+							num = true;
+							if (i == len - 1)
+								check = true;
+						}
+						else
+							break;
+					}
+					if (check)
+					{
+						char c = static_cast<char>(l);
+						if (isprint(c))
+							d->repr_t.c->assign(std::string("'") += c).append("'");
+						else
+							d->repr_t.c->assign("Non Displayable");
+					}
 					else
-						d->repr_t.c->assign("Non Displayable");
+					{
+						if (d->repr_t.c->length() == 1)
+						{
+							if (!std::isprint(d->repr_t.c->at(0)))
+								d->repr_t.c->assign("Non Displayable");
+							else
+								d->repr_t.c->assign(std::string("'") += d->repr_t.c->at(0)).append("'");
+						}
+						else
+							d->table.c = false;
+					}
 					std::cout << "char:" << (d->table.c ? *d->repr_t.c : std::string("Impossible")) << "\n" << std::flush;
 				}
 				break;
 			}
 		}
 	}
+}
+
+ScalarConverter::ScalarConverter(){std::cout << "default constructor called\n" << std::flush;}
+
+ScalarConverter::~ScalarConverter(){std::cout << "destructor called\n" << std::flush;}
+
+
+ScalarConverter::ScalarConverter(const ScalarConverter &s){
+	std::cout << "copy constructor called\n" << std::flush;
+	if (this != &s)
+		*this = s;
+}
+
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &s){
+	std::cout << "copy constructor called\n" << std::flush;
+	if (this != &s)
+		*this = s;
+	return (*this);
 }
 
 void ScalarConverter::convert(std::string &s)
@@ -313,6 +413,11 @@ void ScalarConverter::convert(std::string &s)
 
 	if (rec == 0)
 	{
+		if (s == "")
+		{
+			delete[] state_table;
+			return ;
+		}
 		repr_table repr_t = {
 			.i = new std::string(""),
 			.f = new std::string(""),

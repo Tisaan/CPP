@@ -6,15 +6,15 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:49:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:05:31 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/30 10:22:45 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <exception>
 
-class Bureaucrat: public std::exception{
-	std::string name;
+class Bureaucrat{
+	const std::string name;
 	int			range;
 
 	public:

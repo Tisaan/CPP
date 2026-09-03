@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:23:37 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:19:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/30 11:29:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ const AForm &AForm::operator=(const AForm &s)
 
 int AForm::checkGrade(int grade){
 	if (grade > 150)
-		throw GradeTooHighException();
-	else if (grade < 1)
 		throw GradeTooLowException();
+	else if (grade < 1)
+		throw GradeTooHighException();
 	return (grade);
 }
 
@@ -61,7 +61,7 @@ int AForm::getExecGrade() const {return this->exec;};
 int AForm::getSignGrade() const {return this->exec;};
 
 void	AForm::beSigned(const Bureaucrat &b){
-	if (b.getGrade() >= this->grade)
+	if (b.getGrade() > this->grade)
 		throw AForm::GradeTooLowException();
 	else
 		this->sign = true;

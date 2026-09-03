@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 21:26:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 22:18:34 by tseche           ###   ########.fr       */
+/*   Updated: 2026/09/02 19:01:11 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,21 @@
 
 struct Cont{
 	bool type;
-	size_t lenght;
-	union{
-		std::vector<size_t> vect;
-		std::deque<size_t> deq;
-	};
+	std::vector<size_t> vect;
+	std::deque<size_t> deq;
 
-	Cont(bool ctype = false): type(ctype){
+	Cont(bool ctype = false): type(ctype), vect(), deq(){
 		std::cout << "|Stuct Cont| constructor called\n" << std::flush;
-		if (!type)
-			new (&vect) std::vector<size_t>();
-		else
-			new (&deq) std::deque<size_t>();
 	}
 	~Cont(){
 		std::cout << "|Stuct Cont| destructor called\n" << std::flush;
-		if (type) vect.~vector();
-		else deq.~deque();
-	}
-	Cont &operator=(const Cont &c)
-	{
-		std::cout << "|Stuct Cont| copy assignment operator called\n" << std::flush;
-		this->type = c.type;
-		if (this->type)
-			this->deq = c.deq;
-		else
-			this->vect = c.vect;
-		return (*this);
 	}
 };
 
 class PmergeMe{
 	Cont cont;
+	void sortvect();
+	void sortdeq();
 	public:
 		PmergeMe();
 		PmergeMe(bool type = false);
@@ -59,4 +42,8 @@ class PmergeMe{
 		PmergeMe &operator=(const PmergeMe &p);
 	
 		bool parse(const std::string &s);
+		void sort();
+		std::vector<size_t>::iterator lowerbound(std::vector<size_t>::iterator first, std::vector<size_t>::iterator last, size_t val, size_t step);
+		std::deque<size_t>::iterator lowerbound(std::deque<size_t>::iterator first, std::deque<size_t>::iterator last, size_t val, size_t step);
+		Cont &get_cont();
 };

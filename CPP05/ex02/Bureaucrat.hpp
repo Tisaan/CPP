@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:49:13 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:15:13 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/30 10:22:24 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 class AForm;
 
-class Bureaucrat: public std::exception{
-	std::string name;
+class Bureaucrat{
+	const std::string name;
 	int			range;
 
 	public:

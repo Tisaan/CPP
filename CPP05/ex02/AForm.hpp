@@ -16,7 +16,7 @@
 
 #include "Bureaucrat.hpp"
 
-class AForm: public std::exception{
+class AForm{
 	const std::string name;
 	bool	sign;
 	const int grade;

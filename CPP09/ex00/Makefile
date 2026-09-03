@@ -6,16 +6,16 @@
 #    By: tseche <tseche@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 23:39:11 by tseche            #+#    #+#              #
-#    Updated: 2026/09/01 15:28:40 by tseche           ###   ########.fr        #
+#    Updated: 2026/07/15 17:13:08 by tseche           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = PmergeMe
-CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98 -mavx -mavx2
+NAME = btc
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++98
 CXX	= c++
 SRCS =  ./main.cpp \
-		PmergeMe.cpp \
+		./BitcoinExchange.cpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 

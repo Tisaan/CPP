@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 13:31:05 by tseche            #+#    #+#             */
-/*   Updated: 2026/06/29 18:34:01 by tseche           ###   ########.fr       */
+/*   Updated: 2026/08/23 18:34:48 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Contact::Contact(
 
 Contact::~Contact(){};
 
-std::ostream &operator<<(std::ostream &o, const Contact &c)
+std::ostream &operator << (std::ostream &o, const Contact &c)
 {
 	o << "|" << std::setw(10) << ((c.name.length() <= 10) ? c.name : (c.name.substr(0, 9) + "."));
 	o << std::flush;

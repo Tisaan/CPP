@@ -6,15 +6,14 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 15:09:47 by tseche            #+#    #+#             */
-/*   Updated: 2026/07/15 15:05:58 by tseche           ###   ########.fr       */
+/*   Updated: 2026/07/30 11:31:31 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(){
+Bureaucrat::Bureaucrat(): name("bob"){
 	std::cout << "|Bureaucrate| default constructor called\n" << std::flush;
-	this->name = "Bob";
 	this->range = 1;
 };
 
@@ -25,10 +24,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other): name(other.getName())
 		*this = other;
 }
 
-Bureaucrat::Bureaucrat(const std::string s, int g)
+Bureaucrat::Bureaucrat(const std::string s, int g) : name(s)
 {
 	std::cout << "|Bureaucrat| argument constructor called\n" << std::flush;
-	this->name = s;
 	this->setGrade(g);
 }
 
@@ -52,7 +50,7 @@ void Bureaucrat::setGrade(int g)
 	this->range = g;
 }
 
-void Bureaucrat::incr(){this->setGrade(this->getGrade() + 1);};
+void Bureaucrat::incr(){this->setGrade(this->getGrade() - 1);};
 
 void Bureaucrat::decr(){this->setGrade(this->getGrade() + 1);};
 
