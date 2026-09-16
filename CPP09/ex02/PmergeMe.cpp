@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 21:30:58 by tseche            #+#    #+#             */
-/*   Updated: 2026/09/02 19:08:18 by tseche           ###   ########.fr       */
+/*   Updated: 2026/09/16 18:25:13 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,24 @@
 #include <immintrin.h>
 
 PmergeMe::PmergeMe(): cont(){
-	std::cout << "|PmergeMe| default constructor called\n" << std::flush;
 }
 
 PmergeMe::PmergeMe(bool type): cont(type){
-	std::cout << "|PmergeMe| type constructor called\n" << std::flush;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &p){
-	std::cout << "|PmergeMe| copy constructor called\n" << std::flush;
 	if (this != &p)
 		*this = p;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &p)
 {
-	std::cout << "|PmergeMe| copy constructor called\n" << std::flush;
 	if (this != &p)
 		this->cont = p.cont;
 	return (*this);
 }
 
 PmergeMe::~PmergeMe(){
-	std::cout << "|PmergeMe| destructor called\n" << std::flush;
 }
 
 Cont &PmergeMe::get_cont(){return this->cont;}
@@ -70,205 +65,131 @@ bool PmergeMe::parse(const std::string &s){
 	return (true);
 }
 
-inline std::vector<size_t> gen_jacobsthal(int len){
+std::vector<size_t> PmergeMe::gen_jacobsthal(std::vector<size_t> &nvec, size_t len){
 	std::vector<size_t> vec;
-	if (len == 0)
-		vec.push_back(0);
-	else if (len == 1)
-		vec.push_back(0);
-	if (len < 2)
+	if (len <= 0)
 		return vec;
+	vec.push_back(0);
+	vec.push_back(0);
 	size_t j0 = 0;
 	size_t j1 = 1;
-	for (int i = 2; i < len; i++){
-		size_t jn = j1 + 2 * j0;
+	while (true){
+		size_t jn = j1 + (2 * j0);
+		if (jn < len)
+			break;
 		j0 = j1;
 		j1 = jn;
-		vec.push_back(jn);
+		if (jn != vec.back())
+			vec.push_back(jn);
 	}
-	return (vec);
-}
-
-void PmergeMe::sort(){
-	if (this->cont.type)
-		return sortdeq();
-	else 
-		return sortvect();
-}
-
-void swap(std::vector<size_t> &vec, size_t group_size, size_t size)
-{
-	for (size_t i = group_size - 1; i < size; i += (group_size / 2)){
-		if (vec[i] < vec[i -(group_size / 2)]){
-			size_t i = 0;
-			for (; i < group_size / 2 && i + 4 < group_size / 2; i += 4){
-				__m256i vector = _mm256_loadu_si256(reinterpret_cast<__m256i*>(&vec[i]));
-				__m256i swapped = _mm256_shuffle_epi32(vector, 0xB1);
-				_mm256_storeu_si256(reinterpret_cast<__m256i*>(&vec[i]), swapped);
-			}
-			for (; i + 1 < size; i+=2){
-				size_t temp = vec[i];
-				vec[i] = vec[i + 1];
-				vec[i + 1] = temp;
-			}
-		}
+	size_t prev = 1;
+	for (size_t i = 1; i < vec.size(); ++i){
+		int current = vec[i];
+		for (size_t b = current; b > prev; --b)
+			nvec.push_back(b - 1);
+		prev = current;
 	}
+	for (size_t b = len; b > prev; --b)
+		nvec.push_back(b - 1);
+	return (nvec);
 }
 
-void swap(std::deque<size_t> &vec, size_t group_size, size_t size)
-{
-	for (size_t i = group_size - 1; i < size; i += (group_size / 2)){
-		if (vec[i] < vec[i - (group_size / 2)]){
-			// for (; i < group_size / 2 && i + 4 < group_size / 2; i += 4){
-			// 	__m256i vector = _mm256_loadu_si256(reinterpret_cast<__m256i*>(&vec[i]));
-			// 	__m256i swapped = _mm256_shuffle_epi32(vector, 0xB1);
-			// 	_mm256_storeu_si256(reinterpret_cast<__m256i*>(&vec[i]), swapped);
-			// }
-			for (size_t i = 0; i + 1 < size; i++){
-				size_t temp = vec[i];
-				vec[i] = vec[i + 1];
-				vec[i + 1] = temp;
-			}
-		}
-	}
-}
-
-std::vector<size_t>::iterator PmergeMe::lowerbound(std::vector<size_t>::iterator first, std::vector<size_t>::iterator last, size_t val, size_t step){
-	std::iterator_traits<std::vector<size_t>::iterator>::difference_type distance = std::distance(first, last);
-	std::vector<size_t>::iterator cpy;
+void PmergeMe::sortchoice(){
 	
-	while (distance > 0){
-		cpy = first;
-		//it += (distance / 2) * (step * 2 - 1);
-		// couldn't do it cause not sure if std::Container<T>::Allocator is continuous in memory
-		std::advance(cpy, (distance / 2) * (step * 2 - 1));
-		if (*cpy < val){
-			distance -= (distance / 2) + 1;// skip half
-			first = ++cpy;
-		}
+	std::vector<size_t> jacob;
+	this->gen_jacobsthal(jacob, this->cont.type ? this->cont.deq.size() : this->cont.vect.size());
+	if (this->cont.type){
+		if (this->cont.deq.size() == 1)
+			return ;
+		sort(1, this->cont.deq, jacob);	
+	}
+	else
+	{
+		if (this->cont.vect.size() == 1)
+			return ;
+		sort(1, this->cont.vect,jacob);
+	}
+}	
+
+template <typename T>
+void swap(size_t lvl, T &main){
+	size_t n = main.size();
+	for (size_t i = 0; i < n / (lvl * 2); i++){
+		size_t lstart = lvl * 2 * i;
+		size_t rstart = (i * 2 + 1) * lvl;
+		size_t lend = rstart - 1;
+		size_t rend = (2 * i + 2) * lvl - 1;
+		if (main[lend] > main[rend])
+			std::swap_ranges(main.begin() + lstart, main.begin() + rstart, main.begin() + rstart);
+	}
+}
+
+template <typename T>
+void split(size_t lvl, T &main,T &winner, T &loser, T &left){
+	size_t n = main.size();
+	for (size_t i = 0; i < n / (lvl * 2); i++){
+		size_t lstart = lvl * 2 * i;
+		size_t rstart = (i * 2 + 1) * lvl;
+		size_t rend = (2 * i + 2) * lvl;
+		loser.insert(loser.end(), main.begin() + lstart, main.begin() + rstart);
+		winner.insert(winner.end(), main.begin() + rstart, main.begin() + rend);
+	}
+	if ((main.size() % (lvl * 2)) != 0){
+		size_t leftover = (n / (lvl * 2)) * 2 * lvl;
+		left.assign(main.begin() + leftover, main.end());
+	}
+}
+
+template <typename T>
+size_t bs(T main, int lvl, size_t loser, size_t high){
+	size_t low = 0;
+	while (low < high){
+		size_t mid = low + (high - low) / 2;
+		size_t target = main[(mid + 1) * lvl - 1];
+		if (target < loser)
+			low = mid + 1;
 		else
-			distance = (distance / 2);
+			high = mid;
 	}
-	return (first);
+	return (low);
 }
 
-std::deque<size_t>::iterator PmergeMe::lowerbound(std::deque<size_t>::iterator first, std::deque<size_t>::iterator last, size_t val, size_t step){
-	std::iterator_traits<std::deque<size_t>::iterator>::difference_type distance = std::distance(first, last);
-	std::deque<size_t>::iterator cpy;
+template <typename T> // std::deque / std::vect
+void PmergeMe::sort(size_t lvl, T &main, std::vector<size_t> jacob){
 	
-	while (distance > 0){
-		cpy = first;
-		//it += (distance / 2) * (step * 2 - 1);
-		// couldn't do it cause not sure if std::Container<T>::Allocator is continuous in memory
-		std::advance(cpy, (distance / 2) * (step * 2 - 1));
-		if (*cpy < val){
-			distance -= (distance / 2) + 1;// skip half
-			first = ++cpy;
-		}
-		else
-			distance = (distance / 2);
-	}
-	return (first);
-}
+	if (lvl > main.size() / 2)
+		return ;
+	swap(lvl,
+		main);
+	this->sort(lvl * 2, 
+		main, 
+		jacob);
+	 
+	T loser;
+	T winner;
+	T left;
+	split(lvl, main, winner, loser, left);// fill loser, winner, leftover
 
-void PmergeMe::sortvect(){
-	static std::vector<size_t> vec = this->cont.vect;
-	static const std::vector<size_t> jacob = gen_jacobsthal(vec.size());
-	static size_t group_size = 2;
-	
-	if (group_size * 2 > vec.size())
-		return ;
-	swap(vec, group_size, vec.size());
-	
-	group_size <<= 1;// * 2
-	sortvect();// increment just so that the recursive call produce bigger groups
-	group_size >>= 1;// / 2
-	if (vec.size() / (group_size / 2) < 3)
-		return ;
-	std::vector<size_t> newvec;
-	newvec.resize(vec.size());
-	// add first pair
-	newvec.insert(newvec.begin(), group_size);
-	vec.erase(vec.begin(), vec.begin() + group_size);
-	int i = 1;
-	std::vector<size_t>::iterator begin_new = newvec.begin();
-	for (std::vector<size_t>::iterator it = vec.begin() + group_size; group_size * i <= vec.size(); it += group_size, i++){// append the winner
-		newvec.insert(newvec.end(), it, it + group_size);
-		vec.erase(it, it + group_size);
-	};
-	i = 0;
-	std::vector<size_t>::const_iterator begin = jacob.begin() + 2;
-	std::vector<size_t>::const_iterator end = jacob.begin() + 2;
-	for (size_t pos = 1; pos * group_size <= vec.size();){
-		size_t range = (group_size / 2) * (pos + 1 + i);
-		newvec.insert(
-			lowerbound(begin_new, vec.begin() + range,
-				*(begin_new + pos * (group_size / 2) - 1), group_size / 2),
-			begin_new + (group_size / 2 * pos - group_size / 2),
-			begin_new + (group_size * pos)
-		);
-		i++;
-		pos--;
-		if (pos <= *end){
-			pos = *begin;
-			end = begin;
-			begin++;
-		}
-		while (pos * (group_size / 2) > vec.size() && pos >= *end && pos--);
-		if (pos <= *end)
-			break;
-	}
-	vec.erase(vec.begin(), vec.begin() + (i * group_size / 2));
-	for (size_t i = 0; i < vec.size(); i++){
-		newvec.push_back(vec[i]);
-	}
-	this->cont.vect = newvec;
-}
+	winner.insert(winner.begin(), loser.begin(), loser.begin() + lvl);
 
-void PmergeMe::sortdeq(){
-	static std::deque<size_t> deq = this->cont.deq;
-	static const std::vector<size_t> jacob = gen_jacobsthal(deq.size());
-	static size_t group_size = 2;
-	
-	if (group_size * 2 > deq.size())
-		return ;
-	swap(deq, group_size, deq.size());
-	
-	group_size <<= 1;// * 2
-	sortdeq();// increment just so that the recursive call produce bigger groups
-	group_size >>= 1;// / 2
-	
-	std::deque<size_t> newdeq;
-	for (size_t i = 0; i < group_size; i++)// add first pair
-		newdeq[i] = deq[i];
-	deq.erase(deq.begin(), deq.begin() + group_size);
-	int i = 1;
-	std::deque<size_t>::iterator begin_new = newdeq.begin();
-	for (std::deque<size_t>::iterator it = deq.begin() + group_size; group_size * i <= deq.size(); it += group_size, i++){// append the winner
-		newdeq.insert(newdeq.end(), it, it + group_size);
-		deq.erase(it, it + group_size);
-	};
-	i = 0;
-	std::vector<size_t>::const_iterator begin = jacob.begin() + 2;
-	std::vector<size_t>::const_iterator end = jacob.begin() + 2;
-	for (size_t pos = 1; pos * group_size <= deq.size();){
-		size_t range = (group_size / 2) * (pos + 1 + i);
-		newdeq.insert(lowerbound(begin_new, deq.begin() + range, *(begin_new + pos * (group_size / 2) - 1), static_cast<size_t>(group_size / 2)), begin_new + (group_size / 2 * pos - group_size / 2), begin_new + (group_size * pos));//yeepi profite bien de cette super ligne
-		i++;
-		pos--;
-		if (pos <= *end){
-			pos = *begin;
-			end = begin;
-			begin++;
-			
-		}
-		while (pos * (group_size / 2) > deq.size() && pos >= *end && pos--);
-		if (pos <= *end)
-			break;
+	for (size_t i = 0; i < jacob.size(); i++){
+		size_t index = jacob[i];
+		if (index >= (loser.size() / lvl))// index > num_pair_loserr
+			continue;
+		size_t los = loser[(index + 1) * lvl - 1];
+		size_t pos = bs(winner,
+			lvl,
+			los,
+			(index + 1) * lvl - 1);
+		typename T::iterator end = loser.begin() + index * (lvl * 2);
+		if ((index * (lvl * 2)) >= loser.size())
+			end = loser.end();
+		winner.insert(winner.begin() + pos * lvl, loser.begin() + index * lvl,end);
 	}
-	deq.erase(deq.begin(), deq.begin() + (i * group_size / 2));
-	for (size_t i = 0; i < deq.size(); i++){
-		newdeq.push_back(deq[i]);
+	for (size_t i = 0; i < left.size() / lvl; i++){
+		size_t los = left[(i + 1) * lvl - 1];
+		size_t pos = bs(winner, lvl, los, winner.size() / lvl);
+		winner.insert(winner.begin() + pos * lvl, left.begin() + i * lvl, left.begin() + (i + 1) * lvl);
 	}
-	this->cont.deq = newdeq;
+	main = winner;
 }

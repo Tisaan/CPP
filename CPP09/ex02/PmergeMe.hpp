@@ -6,7 +6,7 @@
 /*   By: tseche <tseche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 21:26:15 by tseche            #+#    #+#             */
-/*   Updated: 2026/09/02 19:01:11 by tseche           ###   ########.fr       */
+/*   Updated: 2026/09/16 18:25:18 by tseche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,15 @@ struct Cont{
 	std::deque<size_t> deq;
 
 	Cont(bool ctype = false): type(ctype), vect(), deq(){
-		std::cout << "|Stuct Cont| constructor called\n" << std::flush;
 	}
 	~Cont(){
-		std::cout << "|Stuct Cont| destructor called\n" << std::flush;
 	}
 };
 
 class PmergeMe{
 	Cont cont;
-	void sortvect();
-	void sortdeq();
+	std::vector<size_t> gen_jacobsthal(std::vector<size_t> &nvec, size_t max);
+	template <typename T> void sort(size_t lvl, T &main, std::vector<size_t> jacob);
 	public:
 		PmergeMe();
 		PmergeMe(bool type = false);
@@ -42,8 +40,6 @@ class PmergeMe{
 		PmergeMe &operator=(const PmergeMe &p);
 	
 		bool parse(const std::string &s);
-		void sort();
-		std::vector<size_t>::iterator lowerbound(std::vector<size_t>::iterator first, std::vector<size_t>::iterator last, size_t val, size_t step);
-		std::deque<size_t>::iterator lowerbound(std::deque<size_t>::iterator first, std::deque<size_t>::iterator last, size_t val, size_t step);
+		void sortchoice();
 		Cont &get_cont();
 };
